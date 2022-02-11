@@ -5,7 +5,7 @@ If you need to integrate Connect in a non-react web application, view these docs
 
 ## Install
 ```
-npm install pelm-connect
+npm install react-pelm-connect
 ```
 
 ## Connect Token
