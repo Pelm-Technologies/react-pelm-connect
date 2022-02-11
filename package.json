@@ -1,0 +1,60 @@
+{
+  "name": "pelm-connect",
+  "version": "1.0.10",
+  "description": "This package is a React wrapper around Pelm's Connect. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).",
+  "author": "edmund",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pelm-Technologies/pelm-connect.git"
+  },
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.14.21",
+    "@types/react-dom": "^16.9.14",
+    "@types/styled-components": "^5.1.18",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "rollup": "^1.32.1",
+    "rollup-plugin-sass": "^1.2.10",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "typescript": "^2.9.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "typescript",
+    "npm"
+  ],
+  "bugs": {
+    "url": "https://github.com/ovieokeh/npm-react-typescript-template/issues"
+  },
+  "homepage": "https://github.com/ovieokeh/npm-react-typescript-template#readme",
+  "dependencies": {
+    "@types/react-modal": "^3.13.1",
+    "@types/styled-system": "^5.1.14",
+    "http-proxy": "^1.18.1",
+    "react-modal": "^3.14.4",
+    "react-router-dom": "^6.2.1",
+    "react-script-hook": "^1.5.0",
+    "react-spinners": "^0.11.0",
+    "styled-components": "^5.3.3",
+    "styled-system": "^5.1.5"
+  }
+}
