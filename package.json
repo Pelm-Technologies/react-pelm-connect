@@ -1,12 +1,12 @@
 {
   "name": "pelm-connect",
-  "version": "1.0.10",
-  "description": "This package is a React wrapper around Pelm's Connect. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).",
+  "version": "1.0.0",
+  "description": "This package provides a react wrapper over Connect, a javascript plugin that allows your users to securely and seamlessly connect their utility accounts.",
   "author": "edmund",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pelm-Technologies/pelm-connect.git"
+    "url": "git+https://github.com/Pelm-Technologies/react-pelm-connect.git"
   },
   "main": "dist/index.js",
   "engines": {
