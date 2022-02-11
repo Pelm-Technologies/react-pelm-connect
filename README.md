@@ -31,7 +31,7 @@ The next step is creating a Config object to initialize Connect.
 
 The Config option takes in the following parameters.
 - `connectToken`: the Connect Token created in the previous step
-- `onSuccess`: this is the callback that is called when your User successfully connects their utility account. This callback should take an 'authorizationCode: string' parameter, which you'll use to get an [`access_token`](https://pelm.readme.io/reference/post_auth-token-1).
+- `onSuccess`: this is the callback that is called when your User successfully connects their utility account. This callback should take an `authorizationCode: string` parameter, which you'll use to get an [`access_token`](https://pelm.readme.io/reference/post_auth-token-1).
 - `onExit`: this is the callback that is called when Connect is exited but the user has not successfully connected their utility account. The callback will be called if the user manually exits Connect or if an error occurs causing Connect to close.
 - `environment`: optional parameter to set the environment. Set this to use Connect in `sandbox` mode, which allows you to play around with Connect without using real data. If this is ommitted, then Connect will default to `prod` mode.
 
@@ -41,7 +41,7 @@ config: Config = {
     connectToken: 'CONNECT_TOKEN',
     onSuccess: (authorizationCode: string) => {...},
     onExit: () => {},
-    environment?: 'prod'
+    environment: 'prod'
 }
 ```
 
