@@ -1,5 +1,5 @@
 # Pelm Connect
-This package provides a react wrapper over Pelm Connect, a javascript plugin that allows your users to securely and seamlessly connect their utility accounts to Pelm.
+This package provides a react wrapper over Pelm Connect, a javascript plugin that allows your users to securely and seamlessly connect their utility accounts.
 
 If you need to integrate Pelm Connect in a non-react web application, view these docs.
 
