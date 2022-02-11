@@ -1,18 +1,19 @@
-This package provides a react wrapper over Pelm Link, a javascript plugin that allows your users to securely and seamlessly connect their utility accounts to Pelm.
+# Pelm Connect
+This package provides a react wrapper over Pelm Connect, a javascript plugin that allows your users to securely and seamlessly connect their utility accounts to Pelm.
 
-If you need to integrate Pelm Link in a non-react web application, view these docs.
+If you need to integrate Pelm Connect in a non-react web application, view these docs.
 
 ## Install
 ```
-npm install pelm-link
+npm install pelm-connect
 ```
 
-## Link Token
+## Connect Token
 
 
-The first step is creating a Link Token. This is an extra security measure that abstracts away information like your `client_id` and `user_id` from the client.
+The first step is creating a Connect Token. This is an extra security measure that abstracts away information like your `client_id` and `user_id` from the client.
 
-You can obtain a Link Token by making the following request.
+You can obtain a Connect Token by making the following request.
 
 ```
 curl --request POST 'http://api.pelm.com/auth/connect-token' \
@@ -21,7 +22,7 @@ curl --request POST 'http://api.pelm.com/auth/connect-token' \
 --form 'user_id="USER_ID"'
 ```
 
-More information on the Link Token can be found in the docs [here](https://pelm.readme.io/reference/post_auth-connect-token).
+More information on the Connect Token can be found in the docs [here](https://pelm.readme.io/reference/post_auth-connect-token).
 
 
 
@@ -31,22 +32,22 @@ More information on the Link Token can be found in the docs [here](https://pelm.
 The next step is creating a Config object to initialize Connect. 
 
 The Config option takes in the following parameters.
-- `linkToken`: the Link Token created in the previous step
+- `connectToken`: the Connect Token created in the previous step
 - `onSuccess`: this is the callback that is called when your User successfully connects their utility account. This callback should take an `authorizationCode: string` parameter, which you'll use to get an [`access_token`](https://pelm.readme.io/reference/post_auth-token-1).
-- `onExit`: this is the callback that is called when Link is exited but the user has not successfully connected their utility account. The callback will be called if the user manually exits Link or if an error occurs causing Link to close.
-- `environment`: optional parameter to set the environment. Set this to use Link in `sandbox` mode, which allows you to play around with Link without using real data. If this is ommitted, then Link will default to `prod` mode.
+- `onExit`: this is the callback that is called when Connect is exited but the user has not successfully connected their utility account. The callback will be called if the user manually exits Connect or if an error occurs causing Connect to close.
+- `environment`: optional parameter to set the environment. Set this to use Connect in `sandbox` mode, which allows you to play around with Connect without using real data. If this is ommitted, then Connect will default to `prod` mode.
 
 Example Config object:
 ```
 config: Config = {
-    linkToken: 'LINK_TOKEN',
+    connectToken: 'CONNECT_TOKEN',
     onSuccess: (authorizationCode: string) => {...},
     onExit: () => {},
     environment?: 'prod'
 }
 ```
 
-## Using Link
+## Using Connect
 
 ### Hook Implementation
 
@@ -59,7 +60,7 @@ import { useConnect, Config } from 'pelm-connect';
 
 const Connect = (props: Props) => {
     const config: Config = {
-        linkToken: 'LINK_TOKEN',
+        connectToken: 'CONNECT_TOKEN',
         onSuccess: (authorizationCode: string) => {...},
         onExit: () => {...}
     };
@@ -88,7 +89,7 @@ import { ConnectButton, Config } from 'pelm-connect';
 
 const Connect = (props: Props) => {
     const config: Config = {
-        linkToken: 'LINK_TOKEN',
+        connectToken: 'CONNECT_TOKEN',
         onSuccess: (authorizationCode: string) => {...},
         onExit: () => {...}
     };
