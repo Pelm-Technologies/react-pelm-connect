@@ -1,8 +1,8 @@
 {
   "name": "react-pelm-connect",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This package provides a react wrapper over Connect, a javascript plugin that allows your users to securely and seamlessly connect their utility accounts.",
-  "author": "edmund",
+  "author": "Pelm",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
