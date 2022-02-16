@@ -1,11 +1,9 @@
 # Pelm Connect
 This package provides a react wrapper over Connect, a javascript plugin that allows your users to securely and seamlessly connect their utility accounts.
 
-If you need to integrate Connect in a non-react web application, view these docs.
-
 ## Install
 ```
-npm install pelm-connect
+npm install react-pelm-connect
 ```
 
 ## Connect Token
@@ -43,7 +41,7 @@ config: Config = {
     connectToken: 'CONNECT_TOKEN',
     onSuccess: (authorizationCode: string) => {...},
     onExit: () => {},
-    environment?: 'prod'
+    environment: 'prod'
 }
 ```
 
