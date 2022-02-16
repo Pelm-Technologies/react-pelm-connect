@@ -1,5 +1,5 @@
 {
-  "name": "pelm-connect",
+  "name": "react-pelm-connect",
   "version": "1.0.0",
   "description": "This package provides a react wrapper over Connect, a javascript plugin that allows your users to securely and seamlessly connect their utility accounts.",
   "author": "edmund",
@@ -43,9 +43,9 @@
     "npm"
   ],
   "bugs": {
-    "url": "https://github.com/ovieokeh/npm-react-typescript-template/issues"
+    "url": "https://github.com/Pelm-Technologies/react-pelm-connect/issues"
   },
-  "homepage": "https://github.com/ovieokeh/npm-react-typescript-template#readme",
+  "homepage": "https://github.com/Pelm-Technologies/react-pelm-connect",
   "dependencies": {
     "@types/react-modal": "^3.13.1",
     "@types/styled-system": "^5.1.14",
