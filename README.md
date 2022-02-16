@@ -97,3 +97,39 @@ const Connect = (props: Props) => {
 
 export default Connect
 ```
+
+### Directly loading javascript script
+
+If you want to implement Connect into a non-React web application, follow this implementation.
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+    <h1>Pelm Connect javascript example</h1>
+    <button onClick="launchPelm()">Connect utility</button>
+    <script src="http://api.pelm.com/connect/pelm-connect.js"></script>
+    <script>
+        const launchPelm = async function() {
+            const connectToken = "YOUR_CONNECT_TOKEN";
+            const onSuccess = (authorizationCode) => {
+                // exchange authorization code for access_token
+            };
+            const onExit = () => {};
+
+            const config = {
+                connectToken,
+                onSuccess,
+                onExit
+            }
+
+            const pelm = await window.PelmConnect.create(config);
+            pelm.open()
+        }
+    </script>
+    </body>
+</html>
+```
