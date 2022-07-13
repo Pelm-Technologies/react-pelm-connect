@@ -14,7 +14,7 @@ The first step is creating a Connect Token. This is an extra security measure th
 You can obtain a Connect Token by making the following request.
 
 ```
-curl --request POST 'http://api.pelm.com/auth/connect-token' \
+curl --request POST 'https://api.pelm.com/auth/connect-token' \
 --header 'client_id: YOUR_CLIENT_ID' \
 --header 'client_secret: YOUR_CLIENT_SECRET' \
 --form 'user_id="USER_ID"'
