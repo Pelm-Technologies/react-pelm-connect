@@ -18,7 +18,10 @@ curl --request POST 'https://api.pelm.com/auth/connect-token' \
 --header 'client_id: YOUR_CLIENT_ID' \
 --header 'client_secret: YOUR_CLIENT_SECRET' \
 --form 'user_id="USER_ID"'
+--form 'utility_id="UTILITY_ID"'
 ```
+
+Include the optional `utility_id` field if you want your User to skip ahead to the Credentials Screen for the specified Utility. You can find a list of `utility_id`s [here](https://docs.pelm.com/reference/utilities).
 
 More information on the Connect Token can be found in the docs [here](https://pelm.readme.io/reference/post_auth-connect-token).
 
