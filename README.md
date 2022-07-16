@@ -21,7 +21,7 @@ curl --request POST 'https://api.pelm.com/auth/connect-token' \
 --form 'utility_id="UTILITY_ID"'
 ```
 
-Include the optional `utility_id` field if you want your User to skip ahead to the Credentials Screen for the specified Utility. You can find a list of `utility_id`s [here](https://docs.pelm.com/reference/utilities).
+Include the optional `utility_id` parameter if you want your User to skip the Utility Selection Screen. You can find a list of `utility_id`s [here](https://docs.pelm.com/reference/utilities).
 
 More information on the Connect Token can be found in the docs [here](https://pelm.readme.io/reference/post_auth-connect-token).
 
