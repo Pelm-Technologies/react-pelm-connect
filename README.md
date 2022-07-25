@@ -55,7 +55,7 @@ Implementation using [React Hooks](https://reactjs.org/docs/hooks-intro.html).
 <!-- TODO: change this code -->
 
 ```
-import { useConnect, Config } from 'pelm-connect';
+import { useConnect, Config } from 'react-pelm-connect';
 
 const Connect = (props: Props) => {
     const config: Config = {
@@ -84,7 +84,7 @@ export default Connect
 We also provide a styled button you can use.
 
 ```
-import { ConnectButton, Config } from 'pelm-connect';
+import { ConnectButton, Config } from 'react-pelm-connect';
 
 const Connect = (props: Props) => {
     const config: Config = {
