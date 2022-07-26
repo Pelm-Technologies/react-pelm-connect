@@ -14,11 +14,14 @@ The first step is creating a Connect Token. This is an extra security measure th
 You can obtain a Connect Token by making the following request.
 
 ```
-curl --request POST 'http://api.pelm.com/auth/connect-token' \
+curl --request POST 'https://api.pelm.com/auth/connect-token' \
 --header 'client_id: YOUR_CLIENT_ID' \
 --header 'client_secret: YOUR_CLIENT_SECRET' \
 --form 'user_id="USER_ID"'
+--form 'utility_id="UTILITY_ID"'
 ```
+
+Include the optional `utility_id` parameter if you want your User to skip the Utility Selection Screen. You can find a list of `utility_id`s [here](https://docs.pelm.com/reference/utilities).
 
 More information on the Connect Token can be found in the docs [here](https://pelm.readme.io/reference/post_auth-connect-token).
 
@@ -52,7 +55,7 @@ Implementation using [React Hooks](https://reactjs.org/docs/hooks-intro.html).
 <!-- TODO: change this code -->
 
 ```
-import { useConnect, Config } from 'pelm-connect';
+import { useConnect, Config } from 'react-pelm-connect';
 
 const Connect = (props: Props) => {
     const config: Config = {
@@ -81,7 +84,7 @@ export default Connect
 We also provide a styled button you can use.
 
 ```
-import { ConnectButton, Config } from 'pelm-connect';
+import { ConnectButton, Config } from 'react-pelm-connect';
 
 const Connect = (props: Props) => {
     const config: Config = {
