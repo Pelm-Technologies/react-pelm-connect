@@ -54,7 +54,7 @@ export const useConnect = (config: Config) => {
 
         createFactory()
 
-    }, [loading, scriptError]);
+    }, [config, loading, scriptError]);
 
 
     return {
