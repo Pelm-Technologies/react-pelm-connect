@@ -9,14 +9,14 @@ npm install react-pelm-connect
 ## Connect Token
 
 
-The first step is creating a Connect Token. This is an extra security measure that abstracts away information like your `client_id` and `user_id` from the client.
+The first step is creating a Connect Token. This is an extra security measure that abstracts away information like your `Pelm-Client-Id` and `Pelm-Secret` from the client.
 
 You can obtain a Connect Token by making the following request.
 
 ```
 curl --request POST 'https://api.pelm.com/auth/connect-token' \
---header 'client_id: YOUR_CLIENT_ID' \
---header 'client_secret: YOUR_CLIENT_SECRET' \
+--header 'Pelm-Client-Id: YOUR_PELM_CLIENT_ID' \
+--header 'Pelm-Secret: YOUR_PELM_SECRET' \
 --form 'user_id="USER_ID"'
 --form 'utility_id="UTILITY_ID"'
 ```
