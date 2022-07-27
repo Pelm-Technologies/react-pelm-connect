@@ -48,3 +48,5 @@ typings/
 dist
 
 .idea
+
+*.code-workspace
