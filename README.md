@@ -34,15 +34,21 @@ The next step is creating a Config object to initialize Connect.
 
 The Config option takes in the following parameters.
 - `connectToken`: the Connect Token created in the previous step
-- `onSuccess`: this is the callback that is called when your User successfully connects their utility account. This callback should take an `authorizationCode: string` parameter, which you'll use to get an [`access_token`](https://pelm.readme.io/reference/post_auth-token-1).
-- `onExit`: this is the callback that is called when Connect is exited but the user has not successfully connected their utility account. The callback will be called if the user manually exits Connect or if an error occurs causing Connect to close.
+- `onSuccess`: this is the callback that is called when your User successfully connects their utility account. This callback should take an - `authorizationCode: string` parameter, which you'll use to get an [`access_token`](https://pelm.readme.io/reference/post_auth-token-1).
+- `onExit`: this is the callback that is called when Connect is exited but the user has not successfully connected their utility account. The callback will be called if the user manually exits Connect or if an error occurs causing Connect to close. This callback accepts `status: string` and `metadata: any` arguments.
+  - The `status` argument indicates what caused Connect to exit. This is safe for programmatic use and can take one of the following values:
+    - `user_initiated_exit`: the user closed Connect by clicking the "x" button or clicking outside the modal.
+    - `unavailable_utility_credentials_submitted`: the user submitted credentials for a utility that Pelm does not yet support.
+  - The `metadata` argument provides additional context. In the case of `unavailable_utility_credentials_submitted`, `metadata` will provide information on which utility the user submitted credentials for as an object like `{utility_id: '8', utility_name: 'Cherokee Electric Cooperative'}`
+
+
 
 Example Config object:
 ```
 config: Config = {
     connectToken: 'CONNECT_TOKEN',
     onSuccess: (authorizationCode: string) => {...},
-    onExit: () => {}
+    onExit: (status: string, metadata: any) => {}
 }
 ```
 
