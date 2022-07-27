@@ -24,9 +24,9 @@ export const useConnect = (config: Config) => {
 
     const [error, setError] = useState<Error | undefined | null>()
 
-    // const [loading, scriptError] = useScript({ src: 'https://api.pelm.com/connect/pelm-connect.js', checkForExisting: true });
+    const [loading, scriptError] = useScript({ src: 'https://api.pelm.com/connect/pelm-connect.js', checkForExisting: true });
     // const [loading, scriptError] = useScript({ src: 'https://pelm-staging.herokuapp.com/connect/pelm-connect.js', checkForExisting: true });
-    const [loading, scriptError] = useScript({ src: 'http://127.0.0.1:5000/connect/pelm-connect.js', checkForExisting: true });
+    // const [loading, scriptError] = useScript({ src: 'http://127.0.0.1:5000/connect/pelm-connect.js', checkForExisting: true });
     
 
     // internal state

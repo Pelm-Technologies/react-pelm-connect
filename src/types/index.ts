@@ -1,6 +1,6 @@
 export type Config = {
   connectToken: string;
   onSuccess: (authorizationCode: string) => void;
-  onExit: (status: string, metadata: {}) => void;
+  onExit: () => void;
   environment?: string;
 }
