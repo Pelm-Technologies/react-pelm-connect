@@ -118,7 +118,7 @@ If you want to implement Connect into a non-React web application, follow this i
   <body>
     <h1>Pelm Connect javascript example</h1>
     <button onClick="launchPelm()">Connect utility</button>
-    <script src="http://api.pelm.com/connect/pelm-connect.js"></script>
+    <script src="https://api.pelm.com/connect/pelm-connect.js"></script>
     <script>
         const launchPelm = async function() {
             const connectToken = "YOUR_CONNECT_TOKEN";
