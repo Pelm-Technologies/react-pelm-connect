@@ -12,6 +12,7 @@ type PelmConnect = {
 interface PelmFactory {
     validateToken: (token: string) => Promise<boolean>;
     open: () => Promise<{}>;
+    exit: () => Promise<{}>;
 }
 
 declare global {
@@ -21,13 +22,25 @@ declare global {
 }
 
 export const useConnect = (config: Config) => {
+    // For internal use
+    let initializeScriptUrl: string;
+    switch(config.environment) {
+        case 'staging': {
+            initializeScriptUrl = 'https://cdn-staging.pelm.com/initialize.js'
+            break;
+        }
+        case 'development': {
+            initializeScriptUrl = 'http://localhost:8080/initialize.js'
+            break;
+        }
+        default: {
+            initializeScriptUrl = 'https://cdn.pelm.com/initialize.js'
+            break;
+        }
+    }
 
     const [error, setError] = useState<Error | undefined | null>()
-
-    const [loading, scriptError] = useScript({ src: 'https://api.pelm.com/connect/pelm-connect.js', checkForExisting: true });
-    // const [loading, scriptError] = useScript({ src: 'https://pelm-staging.herokuapp.com/connect/pelm-connect.js', checkForExisting: true });
-    // const [loading, scriptError] = useScript({ src: 'http://127.0.0.1:5000/connect/pelm-connect.js', checkForExisting: true });
-    
+    const [loading, scriptError] = useScript({ src: initializeScriptUrl, checkForExisting: true });
 
     // internal state
     const [pelmFactory, setPelmFactory] = React.useState<PelmFactory | null>(null);
@@ -56,11 +69,10 @@ export const useConnect = (config: Config) => {
 
     }, [config, loading, scriptError]);
 
-
     return {
         error,
         ready: pelmFactory != null && !loading,
-        exit: () => {},
-        open: pelmFactory ? pelmFactory.open : () => {},
+        exit: pelmFactory ? () => pelmFactory.exit() : () => {},
+        open: pelmFactory ? () => pelmFactory.open() : () => {},
     };
 }
