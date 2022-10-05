@@ -113,30 +113,57 @@ If you want to implement Connect into a non-React web application, follow this i
 <html>
   <head>
     <meta charset="utf-8">
-    <title>My test page</title>
+    <title>Pelm Connect Javascript Demo</title>
+    <script src='https://cdn.pelm.com/initialize.js'></script>
+    <script>
+      (async () => {
+        const generateConnectToken = async function() {
+          // This should be a call to your server, which then makes a request to Pelm.
+          // We're making a request directly to Pelm here for your convenience.
+          const options = {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Pelm-Client-Id': 'YOUR_CLIENT_ID',
+              'Pelm-Secret': 'YOUR_SECRET',
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+              user_id: 'YOUR_SUBMITTED_USER_ID',
+            })
+          };
+          return await fetch('https://api.pelm.com/auth/connect-token', options)
+            .then(response => response.json())
+            .then(response => {return response['connect_token']})
+            .catch(err => console.error(err));
+        }
+        
+        const connectToken = await generateConnectToken();
+        const onSuccess = (authorizationCode) => {
+          // Send authorizationCode to your server and exchange for access_token
+          console.log(`onSuccess called with authorizationCode: ${authorizationCode}`);
+        };
+        const onExit = (status, metadata) => {
+          console.log(`onExit called with status ${status} and metadata ${metadata}`);
+        };
+        const config = {
+            connectToken,
+            onSuccess,
+            onExit,
+        }
+        const handler = window.PelmConnect.create(config)
+
+        const connectUtilityButton = document.getElementById("connect-utility-button");
+        connectUtilityButton.disabled = false;
+        connectUtilityButton.addEventListener("click", (event) => {
+          handler.open();
+        });
+      })()
+    </script>
   </head>
   <body>
-    <h1>Pelm Connect javascript example</h1>
-    <button onClick="launchPelm()">Connect utility</button>
-    <script src="https://api.pelm.com/connect/pelm-connect.js"></script>
-    <script>
-        const launchPelm = async function() {
-            const connectToken = "YOUR_CONNECT_TOKEN";
-            const onSuccess = (authorizationCode) => {
-                // exchange authorization code for access_token
-            };
-            const onExit = () => {};
-
-            const config = {
-                connectToken,
-                onSuccess,
-                onExit
-            }
-
-            const pelm = await window.PelmConnect.create(config);
-            pelm.open()
-        }
-    </script>
-    </body>
+    <h1>Pelm Connect Javascript Demo</h1>
+    <button id='connect-utility-button' disabled>Connect utility</button>
+  </body>
 </html>
 ```
