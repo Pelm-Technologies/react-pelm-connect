@@ -5,23 +5,6 @@ import useScript from 'react-script-hook';
 
 import { Config } from './types/index'
 
-type PelmConnect = {
-    create: (config: Config) => Promise<PelmFactory>;
-}
-
-interface PelmFactory {
-    validateToken: (token: string) => Promise<boolean>;
-    open: () => Promise<{}>;
-    exit: () => Promise<{}>;
-}
-
-declare global {
-    interface Window {
-        // PelmConnect: PelmConnect;
-        PelmConnect: any;
-    }
-}
-
 const isConnectTokenDefined = (config: Config) => {
     return config.connectToken !== undefined;
 }
@@ -57,7 +40,7 @@ export const useConnect = (config: Config) => {
     
     useEffect(() => {
         if (isReadyForInitialization && window.PelmConnect) {
-            window.PelmConnect.create({
+            window.PelmConnect.initialize({
                 ...config,
                 onReady: () => setIsReadyToOpen(true),
             });
