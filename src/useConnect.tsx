@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import useScript from 'react-script-hook';
 
 import { Config } from './types/index'
@@ -17,13 +17,16 @@ interface PelmFactory {
 
 declare global {
     interface Window {
-        PelmConnect: PelmConnect;
+        // PelmConnect: PelmConnect;
+        PelmConnect: any;
     }
 }
 
-export const useConnect = (config: Config) => {
-    console.log("@@@ - local useConnect")
+const isConnectTokenDefined = (config: Config) => {
+    return config.connectToken !== undefined;
+}
 
+export const useConnect = (config: Config) => {
     // For internal use
     let initializeScriptUrl: string;
     switch(config.environment) {
@@ -41,47 +44,42 @@ export const useConnect = (config: Config) => {
         }
     }
 
-    const [error, setError] = useState<Error | undefined | null>()
-    const [loading, scriptError] = useScript({ src: initializeScriptUrl });
+    const [loading, error] = useScript({ src: initializeScriptUrl });
+    const [isReadyToOpen, setIsReadyToOpen] = useState(false);
 
-    // internal state
-    const [pelmFactory, setPelmFactory] = React.useState<PelmFactory | null>(null);
-    const [isReady, setIsReady] = useState(false);
-
+    const isServer = typeof window === 'undefined';
+    const isReadyForInitialization =
+        !isServer &&
+        !!window.PelmConnect &&
+        !loading &&
+        !error &&
+        isConnectTokenDefined(config);
+    
     useEffect(() => {
-        if (loading) {
-            return;
+        if (isReadyForInitialization && window.PelmConnect) {
+            window.PelmConnect.create({
+                ...config,
+                onReady: () => setIsReadyToOpen(true),
+            });
         }
+    }, [isReadyForInitialization, config]);
 
-        if (scriptError || !window.PelmConnect) {
-            // eslint-disable-next-line no-console
-            console.error('Error loading Pelm', scriptError);
-            return;
+    const open = useCallback(() => {
+        if (window.PelmConnect) {
+          window.PelmConnect.open(config);
         }
+    }, [config]);
 
-        async function createFactory() {
-            try {
-                const next = await window.PelmConnect.create({
-                    ...config,
-                    onReady: () => {
-                        console.log("setting ready to true")
-                        setIsReady(true)
-                    }
-                })
-                setPelmFactory(next)
-            } catch (e) {
-                setError(e)
-            }
+    const exit = useCallback(() => {
+        if (window.PelmConnect) {
+          window.PelmConnect.exit();
         }
-
-        createFactory()
-
-    }, [config, loading, scriptError]);
+    }, [config]);
 
     return {
         error,
-        ready: pelmFactory != null && !loading && isReady,
-        exit: pelmFactory ? () => pelmFactory.exit() : () => {},
-        open: pelmFactory ? () => pelmFactory.open() : () => {},
+        ready: isReadyToOpen,
+        open,
+        exit
     };
 }
