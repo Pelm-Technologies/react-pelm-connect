@@ -22,6 +22,8 @@ declare global {
 }
 
 export const useConnect = (config: Config) => {
+    console.log("@@@ - local useConnect")
+
     // For internal use
     let initializeScriptUrl: string;
     switch(config.environment) {
@@ -40,10 +42,11 @@ export const useConnect = (config: Config) => {
     }
 
     const [error, setError] = useState<Error | undefined | null>()
-    const [loading, scriptError] = useScript({ src: initializeScriptUrl, checkForExisting: true });
+    const [loading, scriptError] = useScript({ src: initializeScriptUrl });
 
     // internal state
     const [pelmFactory, setPelmFactory] = React.useState<PelmFactory | null>(null);
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
         if (loading) {
@@ -58,7 +61,13 @@ export const useConnect = (config: Config) => {
 
         async function createFactory() {
             try {
-                const next = await window.PelmConnect.create(config)
+                const next = await window.PelmConnect.create({
+                    ...config,
+                    onReady: () => {
+                        console.log("setting ready to true")
+                        setIsReady(true)
+                    }
+                })
                 setPelmFactory(next)
             } catch (e) {
                 setError(e)
@@ -71,7 +80,7 @@ export const useConnect = (config: Config) => {
 
     return {
         error,
-        ready: pelmFactory != null && !loading,
+        ready: pelmFactory != null && !loading && isReady,
         exit: pelmFactory ? () => pelmFactory.exit() : () => {},
         open: pelmFactory ? () => pelmFactory.open() : () => {},
     };
